@@ -8,7 +8,7 @@ const languages = {
 };
 
 // for DEV
-const langKey = 'ko';
+const langKey = localStorage.getItem('langKey');
 
 export default function i18n(OriginComponent) {
   return class extends React.Component {
