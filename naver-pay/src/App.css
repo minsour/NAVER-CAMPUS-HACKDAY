@@ -1,0 +1,6 @@
+.App-body-wrapper {
+  display: flex;
+}
+.App-body {
+  flex: 1 1 auto;
+}

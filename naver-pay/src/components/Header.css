@@ -1,3 +1,7 @@
 .Header {
-  background-color:#000;
+  background-color:#24292e;
+  padding: 15px;
+}
+.Header-Inner {
+  color: #fff;
 }

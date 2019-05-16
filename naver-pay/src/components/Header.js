@@ -10,7 +10,9 @@ class Header extends React.Component {
   render() {
     return (
       <div className="Header">
-        HEADER
+        <div className="Header-Inner">
+          NAVER PAY - HEADER
+        </div>
       </div>
     );
   }
