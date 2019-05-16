@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import API from '../API';
 
-import OrderCard from '../components/OrderCard';
+import ItemCard from '../components/ItemCard';
+import './List.css';
 
 class List extends Component {
   constructor(props) {
@@ -11,31 +12,31 @@ class List extends Component {
     };
   }
   
-  componentDidMount() {
-    // const res = API.request('order_list');
-    const res = [
-      {id: "1", name:"사탕", price:"3000"},
-      {id: "2", name:"귤", price:"1900"},
-      {id: "3", name:"과자", price:"13000"},
-      {id: "4", name:"지갑", price:"53000"},
-    ];
-    this.setState({listData: res}) ;
+  async componentDidMount() {
+    const res = await API.request('order_list', 'test');
+    this.setState({listData: res.body[0].orders}) ;
   }
 
   render() {
     // console.log(this.state.listData);
-    let body = this.state.listData.map(order => (
-      <OrderCard
-        id={order.id}
-        key={order.id}
-        name={order.name}
-        price={order.price}
-      />
-    )); 
+    let body = [];
+    this.state.listData.forEach(order => {
+      order.items.forEach(item => {
+        body.push((
+          <ItemCard
+            id={item.id}
+            orderId={order.id}
+            key={`card_${order.id}_${item.id}`}
+            name={item.name}
+            price={item.price}
+          />
+        ));
+      });
+    });
     return (
       <div>
         <h1>리스트</h1>
-        <div>
+        <div className="ListBox">
           {body}
         </div>
       </div>

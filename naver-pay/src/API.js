@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-const domain = "http://localhost:3000";
+const domain = "http://localhost:8080";
 
 const API_LIST = {
   summary : {
@@ -9,7 +9,7 @@ const API_LIST = {
   },
   order_list: {
     method : "get",
-    url : domain + "/order_list"
+    url : domain + "/orders/:param"
   },
   order: {
     method : "get",
@@ -17,23 +17,18 @@ const API_LIST = {
   }
 }
 
-function request(key, param) {
+async function request(key, param) {
   let {method, url} = API_LIST[key];
-  url.replace(':param', param);
+  url = url.replace(':param', param);
 
   let res = '';
   if (method == 'get') {
-    //res = await axios.get(url);
-    res = [
-      {id: "1", name:"사탕", price:"3000"},
-      {id: "2", name:"귤", price:"1900"},
-      {id: "3", name:"과자", price:"13000"},
-      {id: "4", name:"지갑", price:"53000"},
-    ];
+    res = await axios.get(url);
   }
-  // if (!res.data.status) {
-  //   alert(res.data.message);
-  // }
+  console.log(res);
+  if (!res.status) {
+    alert(res.data.message);
+  }
 
   return res.data;
 }
