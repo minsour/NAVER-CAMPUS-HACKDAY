@@ -18,14 +18,13 @@ class List extends Component {
   }
 
   render() {
-    // console.log(this.state.listData);
     let body = [];
     this.state.listData.forEach(order => {
       order.items.forEach(item => {
         body.push((
           <ItemCard
             id={item.id}
-            orderId={order.id}
+            order={order}
             key={`card_${order.id}_${item.id}`}
             name={item.name}
             price={item.price}
@@ -34,8 +33,8 @@ class List extends Component {
       });
     });
     return (
-      <div>
-        <h1>리스트</h1>
+      <div className="List">
+        <h1>My Order List</h1>
         <div className="ListBox">
           {body}
         </div>
