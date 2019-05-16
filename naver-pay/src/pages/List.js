@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import API from '../API';
+import API from '../utils/API';
+import i18n from '../utils/i18n';
 
 import ItemCard from '../components/ItemCard';
 import './List.css';
@@ -34,7 +35,7 @@ class List extends Component {
     });
     return (
       <div className="List">
-        <h1>My Order List</h1>
+        <h1>{this.props.lang['my_order_list']}</h1>
         <div className="ListBox">
           {body}
         </div>
@@ -43,4 +44,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default i18n(List);
