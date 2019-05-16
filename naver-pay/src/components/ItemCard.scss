@@ -1,0 +1,31 @@
+.ItemCard {
+  border-top: 1px solid #e1e4e8;
+  display: flex;
+  &:first-child {
+    border-top: none;
+  }
+  &-Left{
+    flex: 1 1 auto;
+    padding: 10px;
+    &:hover {
+      text-decoration: none!important;
+    }
+    &-Item {
+      color: #000;
+    }
+  }
+  &-Right {
+    padding: 10px;
+    flex: 0 0 150px;
+    text-align: center;
+  }
+  &-Seller-Name {
+    font: {
+      weight: 500;
+      size: 13px;
+    }
+  }
+  &-Seller-Phone {
+    font-size: 11px;
+  }
+}
