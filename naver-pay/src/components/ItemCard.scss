@@ -28,4 +28,10 @@
   &-Seller-Phone {
     font-size: 11px;
   }
+  &:hover {
+    background-color: #f6f8fa;
+  }
+  &:first-child:hover {
+    border-radius: 5px 5px 0 0;
+  }
 }

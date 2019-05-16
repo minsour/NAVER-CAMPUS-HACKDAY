@@ -29,6 +29,7 @@ class List extends Component {
             key={`card_${order.id}_${item.id}`}
             name={item.name}
             price={item.price}
+            status={item.status}
           />
         ));
       });

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import i18n from '../utils/i18n';
+import formatter from '../utils/formatter';
+
 import './ItemCard.scss';
 
 const ItemCard = (props) => {
@@ -7,10 +10,19 @@ const ItemCard = (props) => {
     <div className="ItemCard">
       <Link to={`/order/${props.order.id}`} className="ItemCard-Left">
         <div className="ItemCard-Left-Item">
-          <div>
-            {props.id}
+          <div className="ItemCard-row1">
             {props.name}
-            {props.price}
+          </div>
+          <div className="ItemCard-row2">
+            <span className="ItemCard-price">
+              {formatter.price(props.price)}{props.lang['krw']}
+            </span>
+            <span className="ItemCard-date">
+              {formatter.date(props.order.date)}
+            </span>
+          </div>
+          <div className="ItemCard-row3">
+            {props.status}
           </div>
         </div>
       </Link>
@@ -23,7 +35,7 @@ const ItemCard = (props) => {
             {props.order.seller.phone}
           </div>
           <a href={`mailto:${props.order.seller.email}`} className="badge badge-secondary">
-            판매자 문의
+            {props.lang['contact_seller']}
           </a>
         </div>
       </div>
@@ -31,4 +43,4 @@ const ItemCard = (props) => {
   );
 };
 
-export default ItemCard;
+export default i18n(ItemCard);

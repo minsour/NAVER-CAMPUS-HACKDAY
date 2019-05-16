@@ -14,7 +14,7 @@ export default function i18n(OriginComponent) {
   return class extends React.Component {
     render() {
       const currentLang = languages[langKey];
-      return <OriginComponent lang={currentLang} />
+      return <OriginComponent {...this.props} lang={currentLang} />
     }
   }
 }
