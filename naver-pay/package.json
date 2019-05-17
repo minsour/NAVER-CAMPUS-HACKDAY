@@ -13,6 +13,7 @@
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "express": "^4.16.4",
+    "fs": "^0.0.1-security",
     "jss": "^9.8.7",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
@@ -21,7 +22,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-jss": "^8.6.1"
+    "react-jss": "^8.6.1",
+    "react-lines-ellipsis": "^0.14.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
