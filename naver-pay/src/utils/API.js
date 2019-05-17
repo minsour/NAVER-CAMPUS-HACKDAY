@@ -9,17 +9,25 @@ const API_LIST = {
   },
   order_list: {
     method : "get",
-    url : domain + "/orders/:param"
+    url : domain + "/orders/:user_id"
+  },
+  order_list_with_date: {
+    method : "get",
+    url : domain + "/orders/:user_id?startDate=:startDate&endDate:endDate"
   },
   order: {
     method : "get",
-    url : domain + "/order/:param"
+    url : domain + "/order/:order_id"
   }
 }
 
-async function request(key, param) {
+async function request(key, param={}) {
   let {method, url} = API_LIST[key];
-  url = url.replace(':param', param);
+  
+  const keys = Object.keys(param);
+  for(let i=0;i<keys.length;i++) {
+    url = url.replace(":" + keys[i], param[keys[i]])
+  }
 
   let res = '';
   if (method == 'get') {

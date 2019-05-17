@@ -10,18 +10,18 @@ const ItemCard = (props) => {
     <div className="ItemCard">
       <Link to={`/order/${props.order.id}`} className="ItemCard-Left">
         <div className="ItemCard-Left-Item">
-          <div className="ItemCard-row1">
+          <div className="ItemCard-Left-name">
             {props.name}
           </div>
-          <div className="ItemCard-row2">
-            <span className="ItemCard-price">
+          <div>
+            <span className="ItemCard-Left-price">
               {formatter.price(props.price)}{props.lang['krw']}
             </span>
-            <span className="ItemCard-date">
+            <span className="ItemCard-Left-date">
               {formatter.date(props.order.date)}
             </span>
           </div>
-          <div className="ItemCard-row3">
+          <div className="ItemCard-Left-status">
             {props.status}
           </div>
         </div>

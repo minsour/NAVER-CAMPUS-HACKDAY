@@ -6,16 +6,34 @@
   }
   &-Left{
     flex: 1 1 auto;
-    padding: 10px;
+    padding: 15px;
     &:hover {
       text-decoration: none!important;
     }
     &-Item {
       color: #000;
     }
+    &-name {
+      padding-bottom: 5px;
+      font-size: 18px;
+    }
+    &-price {
+      margin-right: 10px;
+    }
+    &-date {
+      font: {
+        weight: 400;
+        size: 13px;
+      }
+      color: #a5a5a5;
+    }
+    &-status {
+      font-size: 13px;
+      color: #a5a5a5;
+    }
   }
   &-Right {
-    padding: 10px;
+    padding: 15px;
     flex: 0 0 150px;
     text-align: center;
   }
