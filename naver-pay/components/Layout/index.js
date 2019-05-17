@@ -12,7 +12,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Link from 'next/link';
 import { inject, observer } from 'mobx-react';
-import DrawerComponent from '../Drawer/Drawer';
+import DrawerComponent from '../Drawer';
 import { styles } from './Styles';
 
 @inject('clickHandleStore')

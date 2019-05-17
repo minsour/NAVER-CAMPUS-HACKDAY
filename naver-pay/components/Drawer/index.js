@@ -42,23 +42,14 @@ class DrawerComponent extends React.Component {
                 {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
             </IconButton>
             </div>
-            <Divider />
             <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {['기본 설정', '비밀번호', '보안 설정', '알림수신 설정', '카드 관리', '계좌 관리', '배송지 관리', '정기/예약 결제'].map((text, index) => (
                 <ListItem button key={text}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
                 </ListItem>
             ))}
-            </List>
             <Divider />
-            <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-                </ListItem>
-            ))}
             </List>
         </Drawer>
     );
