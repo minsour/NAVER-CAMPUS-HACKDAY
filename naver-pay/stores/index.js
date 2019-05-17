@@ -1,12 +1,15 @@
 import { action, observable } from 'mobx';
 import { useStaticRendering } from 'mobx-react';
-import { ClickHandleStore } from './ClickHandleStore';
+import { ClickHandleStore } from './clickHandleStore';
+import { OrderStore } from './orderStore';
+
 const isServer = !process.browser
 useStaticRendering(isServer)
 
 class Store {
   constructor(isServer, initialData = {}) {
-    this.clickHandleStore = new ClickHandleStore(this)
+    this.clickHandleStore = new ClickHandleStore(this);
+    this.orderStore = new OrderStore(this);
   }
 }
 
