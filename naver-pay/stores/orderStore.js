@@ -5,6 +5,19 @@ export class OrderStore {
     @observable orderListArray = [];
     @observable itemListArray = [];
     @observable orderDate = [];
+    @observable startDate = '2018-01-21';
+    @observable endDate = '2018-02-23';
+
+
+    @action
+    searchDate = async (userId, start, end) => {
+      await getPayOrderList(`${userId}?startDate=${this.startDate}&endDate=${this.endDate}`)
+      .then(orders => {
+        this.setOrderDate(orders.body[0].orders);
+        this.setOrderList(orders.body[0].orders);
+        this.setItemList(orders.body[0].orders);
+      });
+    }
 
     @action
     compStringReverse(a, b) {
