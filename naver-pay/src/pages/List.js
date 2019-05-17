@@ -3,9 +3,10 @@ import API from '../utils/API';
 import i18n from '../utils/i18n';
 
 import ItemCard from '../components/ItemCard';
-import './List.scss';
 import DatePicker from 'react-datepicker';
+import formatter from '../utils/formatter';
 
+import './List.scss';
 import "react-datepicker/dist/react-datepicker.css";
 
 class List extends Component {
@@ -18,12 +19,16 @@ class List extends Component {
     };
     this.setStartDate = this.setStartDate.bind(this);
     this.setEndDate = this.setEndDate.bind(this);
-    this.getListAgain = this.getListAgain.bind(this);
+    this.filterSubmit = this.filterSubmit.bind(this);
   }
-  async getListAgain() {
-    //let listData = await API.request('order_list', {'user_id':'test', 'startDate': startDate, 'endDate': endDate});
-    // this.setState({listData: listData});
-    //console.log(listData);
+  async filterSubmit() {
+    let res = await API.request('order_list_with_date', 
+      { 'user_id':'test',
+        'startDate': formatter.date(this.state.startDate, '-'),
+        'endDate': formatter.date(this.state.endDate, '-')
+      }
+    );
+    this.setState({listData: res.body[0].orders});
   }
   setStartDate(date) {
     this.setState({
@@ -85,7 +90,7 @@ class List extends Component {
             selected={this.state.endDate}
             onChange={this.setEndDate}
           />
-          <button className="btn btn-sm btn-secondary" onClick={this.getListAgain}>조회</button>
+          <button className="btn btn-sm btn-secondary" onClick={this.filterSubmit}>조회</button>
         </div>
         <div className="List-Box">
           {body}

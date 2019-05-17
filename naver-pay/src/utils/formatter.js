@@ -1,4 +1,4 @@
-const date = (string) => {
+const date = (string, splicer) => {
   var d = new Date(string),
     month = '' + (d.getMonth() + 1),
     day = '' + d.getDate(),
@@ -7,7 +7,7 @@ const date = (string) => {
   if (month.length < 2) month = '0' + month;
   if (day.length < 2) day = '0' + day;
 
-  return [year, month, day].join('.');
+  return [year, month, day].join(splicer ? splicer : '.');
 }
 
 const price = (string) => {
