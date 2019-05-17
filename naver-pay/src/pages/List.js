@@ -22,6 +22,10 @@ class List extends Component {
     this.filterSubmit = this.filterSubmit.bind(this);
   }
   async filterSubmit() {
+    if (this.state.startDate > this.state.endDate) {
+      alert("날짜 선택이 잘못 되었습니다.");
+      return;
+    }
     let res = await API.request('order_list_with_date', 
       { 'user_id':'test',
         'startDate': formatter.date(this.state.startDate, '-'),
@@ -47,6 +51,11 @@ class List extends Component {
     return d;
   }
 
+  setMonth(n) {
+    var firstDay = new Date(n.getFullYear(), n.getMonth(), 1);
+    var lastDay = new Date(n.getFullYear(), n.getMonth() + 1, 0);
+    this.setState({startDate: firstDay, endDate: lastDay});
+  }
   
   async componentDidMount() {
     const startDate = this.getMonthAgo(1);
@@ -74,10 +83,25 @@ class List extends Component {
         ));
       });
     });
+    
+    let setMonthBtn = [];
+    for (let i=5; i>=0; i--) {
+      setMonthBtn.push(
+        <button
+          className="btn btn-sm btn-outline-secondary mr-1"
+          key={`set_month_${i}`}
+          onClick={() => this.setMonth(this.getMonthAgo(i))}
+        >
+          {this.getMonthAgo(i).getMonth()+1}월
+        </button>
+      )
+    }
+
     return (
       <div className="List">
         <h1>{this.props.lang['my_order_list']}</h1>
         <div className="List-OptionTable">
+          {setMonthBtn}
           <DatePicker
             className="List-DatePicker"
             dateFormat="yyyy-MM-dd"

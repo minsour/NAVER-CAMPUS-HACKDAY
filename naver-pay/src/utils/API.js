@@ -13,7 +13,7 @@ const API_LIST = {
   },
   order_list_with_date: {
     method : "get",
-    url : domain + "/orders/:user_id?startDate=:startDate&endDate:endDate"
+    url : domain + "/orders/:user_id?startDate=:startDate&endDate=:endDate"
   },
   order: {
     method : "get",
