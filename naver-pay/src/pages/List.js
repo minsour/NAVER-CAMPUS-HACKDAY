@@ -13,6 +13,7 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      orderItemObjectsWhole: [],
       orderItemObjects: [],
       orderItemLastIndex: 0,
       startDate: '',
@@ -21,7 +22,11 @@ class List extends Component {
     this.setStartDate = this.setStartDate.bind(this);
     this.setEndDate = this.setEndDate.bind(this);
     this.filterSubmit = this.filterSubmit.bind(this);
+    this.nextPageLoad = this.nextPageLoad.bind(this);
   }
+
+  itemPerPage = 10;
+
   async filterSubmit() {
     if (this.state.startDate > this.state.endDate) {
       alert("날짜 선택이 잘못 되었습니다.");
@@ -48,7 +53,17 @@ class List extends Component {
         );
       });
     });
-    this.setState({orderItemObjects: myArr});
+    this.setState({orderItemObjectsWhole: myArr});
+    this.setState({orderItemObjects: myArr.slice(0, this.itemPerPage)});
+    this.setState({orderItemLastIndex: this.itemPerPage});
+  }
+  nextPageLoad() {
+    if (this.state.orderItemObjectsWhole.length < this.state.orderItemLastIndex) {
+      alert("더 이상 데이터가 없습니다.");
+      return;
+    }
+    this.setState({orderItemObjects: this.state.orderItemObjectsWhole.slice(0, this.state.orderItemLastIndex + this.itemPerPage)});
+    this.setState({orderItemLastIndex: this.state.orderItemLastIndex + this.itemPerPage});
   }
   setStartDate(date) {
     this.setState({
@@ -97,7 +112,9 @@ class List extends Component {
         );
       });
     });
-    this.setState({orderItemObjects: myArr});
+    this.setState({orderItemObjectsWhole: myArr});
+    this.setState({orderItemObjects: myArr.slice(0, this.itemPerPage)});
+    this.setState({orderItemLastIndex: this.itemPerPage});
   }
 
   render() {
@@ -147,6 +164,8 @@ class List extends Component {
         <div className="List-Box">
           {body}
         </div>
+        {this.state.orderItemObjectsWhole.length > this.state.orderItemLastIndex ? 
+          <button className="btn btn-lg btn-primary mt-2" onClick={this.nextPageLoad}>더보기</button> : '' }
       </div>
     );
   }
