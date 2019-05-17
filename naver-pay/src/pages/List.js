@@ -13,9 +13,10 @@ class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listData: [],
+      orderItemObjects: [],
+      orderItemLastIndex: 0,
       startDate: '',
-      endDate: ''
+      endDate: '',
     };
     this.setStartDate = this.setStartDate.bind(this);
     this.setEndDate = this.setEndDate.bind(this);
@@ -32,7 +33,22 @@ class List extends Component {
         'endDate': formatter.date(this.state.endDate, '-')
       }
     );
-    this.setState({listData: res.body[0].orders});
+    const listData = res.body[0].orders;
+    let myArr = [];
+    listData.forEach(order => {
+      order.items.forEach(item => {
+        myArr.push(
+          {
+            'id': item.id,
+            'order': order,
+            'name': item.name,
+            'price': item.price,
+            'status': item.status
+          }
+        );
+      });
+    });
+    this.setState({orderItemObjects: myArr});
   }
   setStartDate(date) {
     this.setState({
@@ -60,29 +76,41 @@ class List extends Component {
   async componentDidMount() {
     const startDate = this.getMonthAgo(1);
     const endDate = new Date();
+    let listData = [];
     this.setState({startDate: startDate});
     this.setState({endDate: endDate});
     console.log(startDate, endDate);
     const res = await API.request('order_list', {'user_id':'test'});
-    this.setState({listData: res.body[0].orders}) ;
+    listData = res.body[0].orders;
+
+    let myArr = [];
+    listData.forEach(order => {
+      order.items.forEach(item => {
+        myArr.push(
+          {
+            'id': item.id,
+            'order': order,
+            'name': item.name,
+            'price': item.price,
+            'status': item.status
+          }
+        );
+      });
+    });
+    this.setState({orderItemObjects: myArr});
   }
 
   render() {
-    let body = [];
-    this.state.listData.forEach(order => {
-      order.items.forEach(item => {
-        body.push((
-          <ItemCard
-            id={item.id}
-            order={order}
-            key={`card_${order.id}_${item.id}`}
-            name={item.name}
-            price={item.price}
-            status={item.status}
-          />
-        ));
-      });
-    });
+    let body = this.state.orderItemObjects.map(obj => 
+      <ItemCard
+        id={obj.id}
+        order={obj.order}
+        key={`card_${obj.order.id}_${obj.id}`}
+        name={obj.name}
+        price={obj.price}
+        status={obj.status}
+      />
+    );
     
     let setMonthBtn = [];
     for (let i=5; i>=0; i--) {
