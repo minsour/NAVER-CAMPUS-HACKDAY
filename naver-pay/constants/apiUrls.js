@@ -1,6 +1,6 @@
-const PAY_GET_ACCOUNT_URL = 'http://localhost:3000/users';
-const PAY_GET_ORDERS_URL = 'http://localhost:3000/orders';
-const PAY_GET_ORDER_DETAIL_URL = 'http://localhost:3000/order';
+const PAY_GET_ACCOUNT_URL = 'http://210.89.191.66:80/users';
+const PAY_GET_ORDERS_URL = 'http://210.89.191.66:80/orders';
+const PAY_GET_ORDER_DETAIL_URL = 'http://210.89.191.66:80/order';
 
 export {
   PAY_GET_ACCOUNT_URL,
