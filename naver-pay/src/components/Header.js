@@ -1,5 +1,8 @@
 import React from 'react';
 import './Header.scss';
+import { setLanguage } from '../action/index'; // Redux - Action
+
+import { connect } from 'react-redux';
 
 const langInfo = {
   'ko': '한국어',
@@ -10,8 +13,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLangDropdown: false,
-      selectedLang: ''
+      showLangDropdown: false
     };
   }
   componentDidMount() {
@@ -21,7 +23,8 @@ class Header extends React.Component {
     this.setState({selectedLang: langKey});
     this.setState({showLangDropdown: false});
     localStorage.setItem('langKey', langKey);
-    location.reload();
+    //location.reload();
+    this.props.onClick(langKey);
   }
   render() {
     return (
@@ -46,5 +49,19 @@ class Header extends React.Component {
   }
 }
 
+const langStateToProps = (state) => {  
+  console.log(state);
+  return {
+    selectedLang: state.todos
+  }
+}
 
-export default Header;
+const langDispatchToProps = (dispatch) => {  
+  return {
+      onClick(data) {
+        dispatch(setLanguage(data)) // 액션 메서드
+      }
+  }
+}
+
+export default connect(langStateToProps, langDispatchToProps)(Header);

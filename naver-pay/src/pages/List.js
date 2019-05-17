@@ -107,7 +107,8 @@ class List extends Component {
             'order': order,
             'name': item.name,
             'price': item.price,
-            'status': item.status
+            'status': item.status,
+            'category': item.category
           }
         );
       });
@@ -126,6 +127,7 @@ class List extends Component {
         name={obj.name}
         price={obj.price}
         status={obj.status}
+        category={obj.category}
       />
     );
     

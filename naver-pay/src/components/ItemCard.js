@@ -11,6 +11,9 @@ const ItemCard = (props) => {
       <Link to={`/order/${props.order.id}`} className="ItemCard-Left">
         <div className="ItemCard-Left-Item">
           <div className="ItemCard-Left-name">
+            <span className="badge badge-info mr-2">
+              {props.category}
+            </span>
             {props.name}
           </div>
           <div>
